@@ -11,6 +11,10 @@ sqlalchemy-cockroachdb = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 sqlalchemy-utils = "*"
+flask-restful = "*"
+flask-marshmallow = "*"
+flask-jwt-extended = "*"
+marshmallow-sqlalchemy = "*"
 
 [dev-packages]
 

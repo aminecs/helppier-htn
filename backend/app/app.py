@@ -1,5 +1,9 @@
+from flask_restful import Api
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+
+
 
 from config import Config
 
@@ -11,15 +15,26 @@ def create_app():
     return app
 
 app = create_app()
-
+api = Api(app)
 # DB Config
 db = SQLAlchemy(app)
-
 from .models.user import UserModel
 from .models.job import JobModel
 db.create_all()
+# Marshmallow config
+ma = Marshmallow(app)
 
 
+# Define paths for api resources
+from .resources.user import User, Users, UserLogin, UserRegistration
+from .resources.job import Job, Jobs
+
+api.add_resource(User, "/api/user/<int:user_id>")
+api.add_resource(Users, "/api/users")
+api.add_resource(UserRegistration, "/api/register")
+api.add_resource(UserLogin, "/api/login")
+api.add_resource(Job, "/api/job/<int:user_id>")
+api.add_resource(Jobs, "/api/jobs")
 
 @app.route('/')
 def hello_world():
