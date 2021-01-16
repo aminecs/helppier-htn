@@ -1,0 +1,6 @@
+.listViewHeader{
+    display: flex;
+}
+.listViewHeaderValue{
+    flex: 1;
+}

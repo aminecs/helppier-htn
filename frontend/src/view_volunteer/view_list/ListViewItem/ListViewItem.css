@@ -1,0 +1,6 @@
+.listViewItem{
+    display: flex;
+}
+.listViewItemValue{
+    flex: 1;
+}

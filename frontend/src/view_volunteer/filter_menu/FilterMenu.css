@@ -1,0 +1,18 @@
+.filterMenu{
+    display: flex;
+    padding: 25px;
+}
+.mapViewBtnContainer{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.mapViewBtn{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 5px;
+}

@@ -1,0 +1,23 @@
+.mainMenu{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 25px 0 25px;
+    border-bottom: 1px solid lightgray;
+}
+.mainMenuLeft, .mainMenuRight{
+    display: flex;
+    font-weight: bold;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.mainMenuSelected{
+    border-bottom: 5px solid #F8B62C;
+}
+.logo{
+    padding-left: 25px;
+}
+.mainMenuTabBtn{
+    margin: 0 25px;
+    cursor: pointer;
+}
