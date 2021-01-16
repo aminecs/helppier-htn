@@ -33,6 +33,8 @@ class JobModel(db.Model):
             "description": self.description,
             "owner_id": self.owner_id,
             "volunteer_id": self.volunteer_id,
+            "longitude": self.longitude,
+            "latitude": self.latitude,
         }
 
     def save(self):
