@@ -16,19 +16,9 @@ class UserModel(db.Model):
     owned_jobs = db.relationship('JobModel', backref='owner', lazy=True, foreign_keys="JobModel.owner_id")
     volunteered_jobs = db.relationship('JobModel', backref='volunteer', lazy=True, foreign_keys="JobModel.owner_id")
 
-    # Payments = db.relationship('Payment', backref = 'payer', lazy = 'dynamic', foreign_keys = 'Payment.uidPayer')
-    # Received = db.realtionship('Payment', backref = 'Receiver', lazy = 'dynamic, foreign_keys = 'Payment.uidReceiver')
-
     def __repr__(self):
-        return f"<User({self.id}, {self.firstname}, {self.lastname}, {self.email}, {self.password})"
+        return f"<User({self.id}, {self.firstname}, {self.lastname}, {self.email}, {self.password} {self.rewards})"
 
-
-    # def save(self):
-    #     def callback(session):
-    #         session.add(self)
-    #     print("Saving user")
-    #     run_transaction(sessionmaker(bind=db.engine), callback)
-    #     print("Saved user")
 
     def save(self):
         db.session.add(self)
@@ -36,9 +26,11 @@ class UserModel(db.Model):
 
     def json(self):
         return {
+            "id": self.id,
             "firstname": self.firstname,
             "lastname": self.lastname,
             "email": self.email,
+            "rewards": self.rewards,
         }
 
     @classmethod
@@ -46,5 +38,9 @@ class UserModel(db.Model):
         return cls.query.filter(cls.email==email).first()
 
     @classmethod
-    def find_by_id(cls, email):
-        return cls.query.filter(cls.id==_id).first()
+    def find_by_id(cls, id):
+        return cls.query.filter(cls.id==id).first()
+
+    @classmethod
+    def get_users(cls):
+        return cls.query.all()
