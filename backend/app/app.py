@@ -27,13 +27,14 @@ ma = Marshmallow(app)
 
 # Define paths for api resources
 from .resources.user import User, Users, UserLogin, UserRegistration
-from .resources.job import Job, Jobs
+from .resources.job import Job, Jobs, JobCreation
 
 api.add_resource(User, "/api/user/<int:user_id>")
 api.add_resource(Users, "/api/users")
 api.add_resource(UserRegistration, "/api/register")
 api.add_resource(UserLogin, "/api/login")
-api.add_resource(Job, "/api/job/<int:post_id>")
+api.add_resource(Job, "/api/job/<int:job_id>")
+api.add_resource(JobCreation, "/api/job")
 api.add_resource(Jobs, "/api/jobs")
 
 @app.route('/')

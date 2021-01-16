@@ -15,6 +15,7 @@ flask-restful = "*"
 flask-marshmallow = "*"
 flask-jwt-extended = "*"
 marshmallow-sqlalchemy = "*"
+geoalchemy2 = "*"
 
 [dev-packages]
 
