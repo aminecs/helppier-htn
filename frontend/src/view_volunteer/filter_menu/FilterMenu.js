@@ -5,6 +5,7 @@ import './FilterMenu.css';
 
 //components
 import FilterInput from './filter_input/FilterInput';
+import FilterTextInput from './filter_text_Input/FilterTextInput';
 
 function FilterMenu(props) {
   return (
@@ -12,16 +13,13 @@ function FilterMenu(props) {
         <FilterInput
             headerValue = "Task Type"
             placeholder = "Dog walking, grocery run..."
-            icon = {"icon down"}
             onChangeInput = {props.onChangeTaskType}/>
         <FilterInput
             headerValue = "Time Needed"
-            icon = {"icon down"}
             placeholder = "Your time commitment"
             onChangeInput = {props.onChangeTimeCommitment}/>
-        <FilterInput
+        <FilterTextInput
             headerValue = "Neighbourhood"
-            icon = {"location Icon"}
             placeholder = "Southwark, London"
             onChangeInput = {props.onChangeNeighbourhood}/>
         <div className = "mapViewBtnContainer">

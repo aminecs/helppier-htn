@@ -1,0 +1,22 @@
+[
+    {
+        "_id": 1,
+        "longitude": -79.3972334,
+        "latitude": 43.6634421,
+        "username": "johndoe",
+        "name": "John Doe",
+        "type": "delivery",
+        "time": 35,
+        "rewards": 500
+    },
+    {
+        "_id": 2,
+        "longitude": -79.3933347,
+        "latitude": 43.6654089,
+        "username": "janicec",
+        "name": "Janice C",
+        "type": "baking",
+        "time": 50,
+        "rewards": 300
+    }
+]

@@ -1,16 +1,21 @@
-import ReactMapGL, { NavigationControl, Marker, Popup, FlyToInterpolator } from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import React, { useState, useEffect } from 'react';
 
 //css
 import './MapView.css';
 
+//mock data
+import mock_task_data from '../../mock_task_data.json';
+
 //components
 import TaskDescriptionCard from './TaskDescriptionCard/TaskDescriptionCard';
 import RequestVolunteerCard from './RequestVolunteerCard/RequestVolunteerCard';
+import TaskMarker from './TaskMarker/TaskMarker';
 
 function MapView(props) { 
   //location
   const [viewport, setViewport] = useState(null);
+  const [taskDescriptionCardId, setTaskDescriptionCardId] = useState(null);
 
   //component did mount
   useEffect(() => {
@@ -26,6 +31,8 @@ function MapView(props) {
     }
   }, []);
 
+
+
   if(viewport){
     return (
       <div className = "mapView">
@@ -38,7 +45,18 @@ function MapView(props) {
           onViewportChange={nextViewport => setViewport(nextViewport)}>
             {props.isRequestView &&
               <RequestVolunteerCard />}
-            <TaskDescriptionCard />
+            {taskDescriptionCardId &&
+              <TaskDescriptionCard />}
+            {mock_task_data.map((task, index) => {
+              return(
+                <TaskMarker
+                  id =  {task._id}
+                  longitude = {task.longitude}
+                  latitude = {task.latitude}
+                  selected = {task._id === taskDescriptionCardId}
+                  setTaskDescriptionCardId = {setTaskDescriptionCardId}/>
+              )
+            })}
           </ReactMapGL>
       </div>
     );

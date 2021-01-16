@@ -1,0 +1,8 @@
+.taskIndicator{
+    color: #A2A9AD;
+    cursor: pointer;
+}
+.selectedTaskIndicator{
+    color: #F8B62C;
+    cursor: pointer;
+}
