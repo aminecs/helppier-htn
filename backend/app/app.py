@@ -33,7 +33,7 @@ api.add_resource(User, "/api/user/<int:user_id>")
 api.add_resource(Users, "/api/users")
 api.add_resource(UserRegistration, "/api/register")
 api.add_resource(UserLogin, "/api/login")
-api.add_resource(Job, "/api/job/<int:user_id>")
+api.add_resource(Job, "/api/job/<int:post_id>")
 api.add_resource(Jobs, "/api/jobs")
 
 @app.route('/')

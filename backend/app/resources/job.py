@@ -5,7 +5,12 @@ from ..models.user import UserModel
 
 
 class Job(Resource):
-    def post(self):
+    def get(self, job_id):
+        """Get the Details of a job"""
+
+        return {"msg": "Job details route under construction"}
+
+    def post(self, job_id):
         """Create a volunteer job"""
 
         return {"msg": "Create job route under construction"}
