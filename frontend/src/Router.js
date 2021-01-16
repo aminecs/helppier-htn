@@ -4,9 +4,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 //components
 import LoginView from './view_login/LoginView';
 import RegisterView from './view_register/RegisterView';
-import MapView from './view_map/MapView';
+import MapView from './view_volunteer/VolunteerView';
 
-function Router() {  
+function Router() {
     return (
       <BrowserRouter>
         <Route exact path = "/login" component = {LoginView} />

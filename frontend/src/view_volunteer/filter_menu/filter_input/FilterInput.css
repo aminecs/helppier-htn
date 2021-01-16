@@ -1,0 +1,34 @@
+.filterInput{
+    flex: 1;
+    margin-right: 30px;
+}
+.filterInputHeader{
+    padding: 0 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.filterInputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #FFF8F1;
+    border-radius: 5px;
+    cursor: pointer;
+}
+select{
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    background-color: #FFF8F1;
+    outline: none;
+    cursor: pointer;
+    color: rgb(192, 190, 190);
+    width: 100%;
+}
+.filterInputDownIcon{
+    margin-left: 15px;
+    color: #F8B62C;
+}
