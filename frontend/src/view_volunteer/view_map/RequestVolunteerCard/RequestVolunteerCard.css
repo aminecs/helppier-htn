@@ -1,7 +1,0 @@
-.requestVolunteerCard{
-    position: absolute;
-    background-color: white;
-    left: 0px;
-    height: calc(100% - 75px);
-    padding: 10px;
-}

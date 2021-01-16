@@ -3,11 +3,13 @@
         "_id": 1,
         "longitude": -79.3972334,
         "latitude": 43.6634421,
-        "username": "johndoe",
-        "name": "John Doe",
+        "username": "amine",
+        "name": "Amine",
         "type": "delivery",
         "time": 35,
-        "rewards": 500
+        "rewards": 500,
+        "createdDate": "Jan 18, 2021",
+        "description": "This is my shitty description"
     },
     {
         "_id": 2,
@@ -17,6 +19,20 @@
         "name": "Janice C",
         "type": "baking",
         "time": 50,
-        "rewards": 300
+        "rewards": 300,
+        "createdDate": "Feb 19, 2021",
+        "description": "Hello, with the heavy rain warning this weekend I am concerned about walking to get groceries on my own. I am looking for a kind neighbour to help me pick up a few grocery items. Many thanks in advance! "
+    },
+    {
+        "_id": 3,
+        "longitude": -79.5541535,
+        "latitude": 43.71223,
+        "username": "tele1",
+        "name": "Tele",
+        "type": "baking",
+        "time": 150,
+        "rewards": 200,
+        "createdDate": "June 08, 2020",
+        "description": "Hello, with the heavy rain warning this weekend I am concerned about walking to get groceries on my own. I am looking for a kind neighbour to help me pick up a few grocery items. Many thanks in advance! "
     }
 ]

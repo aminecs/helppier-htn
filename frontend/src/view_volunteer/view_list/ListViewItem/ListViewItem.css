@@ -1,6 +1,33 @@
 .listViewItem{
     display: flex;
+    flex-direction: column;
+    padding: 25px 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 300ms;
+}
+.listViewItem:hover{
+    opacity: 0.7;
+}
+.listViewGolden{
+    background-color: #FFF8F1;
 }
 .listViewItemValue{
     flex: 1;
+    text-align: center;
+}
+.listViewItemContainer{
+    display: flex;
+    flex: 1;
+}
+.listViewItemValueDescription{
+    margin-top: 25px;
+    font-style: italic;
+    width: 50%;
+}
+.listViewItemValueDescriptionContainer{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

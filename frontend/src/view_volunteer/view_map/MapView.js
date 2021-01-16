@@ -9,7 +9,6 @@ import mock_task_data from '../../mock_task_data.json';
 
 //components
 import TaskDescriptionCard from './TaskDescriptionCard/TaskDescriptionCard';
-import RequestVolunteerCard from './RequestVolunteerCard/RequestVolunteerCard';
 import TaskMarker from './TaskMarker/TaskMarker';
 
 function MapView(props) { 
@@ -43,10 +42,9 @@ function MapView(props) {
           mapStyle='mapbox://styles/mapbox/outdoors-v10?optimize=true'
           mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_API_KEY}
           onViewportChange={nextViewport => setViewport(nextViewport)}>
-            {props.isRequestView &&
-              <RequestVolunteerCard />}
             {taskDescriptionCardId &&
-              <TaskDescriptionCard />}
+              <TaskDescriptionCard
+                id = {taskDescriptionCardId}/>}
             {mock_task_data.map((task, index) => {
               return(
                 <TaskMarker

@@ -20,7 +20,7 @@ function LoginView() {
   function loginUser(){
     const data = {username, password};
     console.log(data);
-    history.push("/map");
+    history.push("/volunteer");
     
     /*var request = postRequest(data, "http://localhost:8080");
     fetch(request).then((response) => {

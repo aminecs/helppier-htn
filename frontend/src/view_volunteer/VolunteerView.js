@@ -17,7 +17,6 @@ function VolunteerView() {
 
   //view states
   const [isMap, toggleIsMap] = useState(true);
-  const [isRequestView, toggleIsRequestView] = useState(false);
 
   //on change inputs
   function onChangeTaskType(value){
@@ -38,9 +37,7 @@ function VolunteerView() {
 
   return (
     <div className = "volunteerView">
-      <MainMenu
-        isRequestView = {isRequestView}
-        toggleIsRequestView = {toggleIsRequestView}/>
+      <MainMenu/>
       <FilterMenu
         onChangeTaskType = {onChangeTaskType}
         onChangeTimeCommitment = {onChangeTimeCommitment}
@@ -48,8 +45,7 @@ function VolunteerView() {
         currentViewIsMap = {isMap}
         toggleCurrentView = {toggleCurrentView}/>
       {isMap ?
-        <MapView
-          isRequestView = {isRequestView}/> :
+        <MapView/> :
         <ListView />}
     </div>
   );
