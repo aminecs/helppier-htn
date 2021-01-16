@@ -13,6 +13,12 @@ class UserModel(db.Model):
     password = db.Column(db.String(80))
     rewards = db.Column(db.Numeric(10,2))
 
+    owned_jobs = db.relationship('JobModel', backref='owner', lazy=True, foreign_keys="JobModel.owner_id")
+    volunteered_jobs = db.relationship('JobModel', backref='volunteer', lazy=True, foreign_keys="JobModel.owner_id")
+
+    # Payments = db.relationship('Payment', backref = 'payer', lazy = 'dynamic', foreign_keys = 'Payment.uidPayer')
+    # Received = db.realtionship('Payment', backref = 'Receiver', lazy = 'dynamic, foreign_keys = 'Payment.uidReceiver')
+
     def __repr__(self):
         return f"<User({self.id}, {self.firstname}, {self.lastname}, {self.email}, {self.password})"
 
