@@ -10,6 +10,7 @@ sqlalchemy = "*"
 sqlalchemy-cockroachdb = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+sqlalchemy-utils = "*"
 
 [dev-packages]
 
