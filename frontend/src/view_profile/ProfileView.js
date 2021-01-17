@@ -121,7 +121,7 @@ function ProfileView() {
                     </div>
                     <div style ={{position: "absolute", transform: "translateY(160%)", left: 525, color: "#F58424"}}><b>{myUser.rewards} points</b></div>
                   </div>
-                  <div style ={{position: "absolute", transform: "translateY(50%)", left: 725}}><b>10 points</b></div>
+                  <div style ={{position: "absolute", transform: "translateY(50%)", left: 725}}><b>30 points</b></div>
                 </div>
               </div>
               {redeemVisible &&
@@ -174,7 +174,7 @@ function ProfileView() {
                   </div>
                 </div>}
               <div className = "profileViewYourPointsFooter">
-                <div className = "">Every 10 points earns you $10 at a local retailer of your choice!</div>
+                <div className = "">Every 30 points earns you $30 at a local retailer of your choice!</div>
                 <div className = "redeemBtn" onClick = {redeemGift}>Redeem</div>
               </div>
             </div>

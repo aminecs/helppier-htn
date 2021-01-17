@@ -10,6 +10,8 @@ function ListView(props) {
 
   function volunteer(){
     const data = {"user_id": Cookies.get("userId")};
+    console.log(data);
+    console.log(selectedTask);
     var request = postRequest(data, "http://localhost:5000/api/job/" + selectedTask);
     fetch(request).then((response) => {
       response.json().then((data) => {
