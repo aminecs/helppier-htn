@@ -6,6 +6,7 @@ from geoalchemy2 import func
 from geoalchemy2.types import Geometry
 from geoalchemy2.elements import WKTElement
 from haversine import haversine, Unit
+from datetime import datetime
 
 from ..app import db, app
 from .user import UserModel
@@ -18,22 +19,29 @@ class JobModel(db.Model):
     __tablename__ = "job"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), default="task")
+    title = db.Column(db.String(100), default="")
     description = db.Column(db.String(400), nullable=False)
+    job_type = db.Column(db.String(25))
 
     owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     volunteer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
-    reward = db.Column(db.Integer)
+    reward = db.Column(db.Integer, default=100, nullable=False)
 
     location = db.Column(Geometry(geometry_type="POINT", srid=4326)) # point representing long & lat
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
+
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    time_needed_mins = db.Column(db.Float, nullable=False)
+
+    completed = db.Column(db.Boolean, default=False, nullable=False)
 
 
     def __repr__(self):
         return f"<Job({self.id}, {self.title}, {self.description}, {self.reward}, {self.owner_id}, {self.volunteer_id})"
 
     def json(self):
+        created_time = self.created_at.strftime("%m/%d/%Y") if self.created_at is not None else None
         return {
             "id": self.id,
             "title": self.title,
@@ -42,12 +50,23 @@ class JobModel(db.Model):
             "volunteer_id": self.volunteer_id,
             "longitude": self.longitude,
             "latitude": self.latitude,
+            "job_type": self.job_type,
+            "reward": self.reward,
+            "created_at": created_time,
+            "completed": self.completed,
+            "time_needed_mins": self.time_needed_mins,
         }
 
     def dist_from_point(self, latitude, longitude):
         return haversine((float(self.latitude), float(self.longitude)), (float(latitude), float(longitude)))
 
     def save(self):
+        if self.created_at is None:
+            self.created_at = datetime.utcnow()
+        if self.completed is None:
+            self.completed = False
+        if self.reward is None:
+            self.reward = 100
         db.session.add(self)
         db.session.commit()
         print("Added a job")
@@ -56,12 +75,15 @@ class JobModel(db.Model):
         """Saves and turns latitude & longitude into point objects"""
         connection = db.engine.raw_connection()
         with connection.cursor() as cur:
-            stmt = f"INSERT INTO job (description, owner_id, location, latitude, longitude) VALUES( '{self.description}', {self.owner_id}, ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326), {self.latitude}, {self.longitude});"
-            # print(stmt)
+            stmt = f"INSERT INTO job (description, owner_id, location, latitude, longitude, job_type, time_needed_mins) VALUES( '{self.description}', {self.owner_id}, ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326), {self.latitude}, {self.longitude}, '{self.job_type}', {self.time_needed_mins});"
             cur.execute(
                 stmt
             )
         connection.commit()
+
+    def assign_volunteer(self, user_id):
+        self.volunteer_id = user_id
+        self.save()
 
     @classmethod
     def find_closest(cls, lon, lat, radius, limit=5):
@@ -69,13 +91,9 @@ class JobModel(db.Model):
         # Get all jobs
         jobs = cls.get_jobs()
 
-        print(jobs[0])
-        print(jobs[1])
-        print(type(jobs[0]))
-
         # Sort jobs by distance to point
-        jobs.sort(key=lambda job: job.dist_from_point(lat, lon))
-        print(jobs)
+        if len(jobs) > 1:
+            jobs.sort(key=lambda job: job.dist_from_point(lat, lon))
 
         # Return the top
         return jobs[:limit]
@@ -93,41 +111,6 @@ class JobModel(db.Model):
         connection.commit()
 
 
-    # @classmethod
-    # def find_closest(cls, lon, lat, radius, limit=5):
-    #     """Find the closest requests to a point"""
-
-    #     center = 'POINT({}, {})'.format(lon, lat)
-    #     cls.query.order_by(func.ST_Distance(cls.location, center))
-
-    #     pt = WKTElement('POINT({0} {1})'.format(lon, lat), srid=4326)
-    #     return cls.query.order_by(cls.location.distance_box(pt)).all()
-
-
-    def add_location(self):
-        # connection = db.engine.raw_connection()
-        # print(self.id)
-        # with connection.cursor() as cur:
-        #     cur.execute(
-        #         f"UPDATE job SET location = ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326) where id={self.id};"
-        #     )
-            # db.session.commit()
-        # self.location = WKTElement(f'POINT({req_body["longitude"]} {req_body["latitude"]})')
-        # def callback(session):
-        #     session.query(self.__class__).filter("jobModel.id"==self.id).update(
-        #         {"location": f'POINT({self.longitude}, {self.latitude})'}
-        #     )
-
-        # run_transaction(sessionmaker(bind=db.engine), callback)
-        conn = psycopg2.connect(os.environ.get("POSTGRES_DB_URI"))
-        with conn.cursor() as cur:
-            print("Connected with driver")
-            ret = cur.execute(f"UPDATE job SET description = 'Wish it worked' where id={self.id};")
-            print("ret", ret)
-            # cur.execute(f"UPDATE job SET location = ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326) where id={self.id};")
-        conn.commit()
-        conn.close()
-        return None
 
     @classmethod
     def find_by_id(cls, _id):

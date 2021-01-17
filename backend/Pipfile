@@ -17,6 +17,7 @@ flask-jwt-extended = "*"
 marshmallow-sqlalchemy = "*"
 geoalchemy2 = "*"
 haversine = "*"
+requests = "*"
 
 [dev-packages]
 

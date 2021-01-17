@@ -28,6 +28,33 @@ class Users(Resource):
             "users": users_json
         }
 
+class UserRanking(Resource):
+    def get(self):
+        """Get the top users"""
+
+        users = UserModel.get_top_earners()
+        users_json = [user.json() for user in users]
+        return {"users": users_json}
+
+class UserOwnedJobs(Resource):
+    def get(self, user_id):
+        """Get the list of all jobs owned by user"""
+
+        user = UserModel.find_by_id(user_id)
+        jobs = [job.json() for job in user.posted_jobs]
+
+        return {"jobs": jobs}
+
+class UserVolunteeredJobs(Resource):
+    def get(self, user_id):
+        """Get a list of jobs the user has volunteered for"""
+        user = UserModel.find_by_id(user_id)
+        print("Getting volunteered jobs")
+        jobs = [job.json() for job in user.volunteered_jobs]
+
+        return {"jobs": jobs}
+
+
 
 class UserRegistration(Resource):
     def post(self):
@@ -39,6 +66,7 @@ class UserRegistration(Resource):
         except IntegrityError as e:
             return {"error": "email already registered"}, 404
         return {"msg": "User successfully saved", "user_id": user.id}, 201
+
 
 class UserLogin(Resource):
     def post(self):
