@@ -1,0 +1,15 @@
+.requestTextInputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background-color:rgba(144, 202, 228, 0.2);
+    border-radius: 5px;
+}
+.requestTextInputBlue{
+    background-color: rgba(144, 202, 228, 0.0);
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}

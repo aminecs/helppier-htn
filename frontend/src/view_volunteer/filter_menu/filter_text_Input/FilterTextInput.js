@@ -10,10 +10,11 @@ function FilterTextInput(props) {
     return(
         <div className = "filterInput">
             <div className = "filterInputHeader">{props.headerValue}</div>
-            <div className = "filterInputContainer">
+            <div className = {props.color=== "blue" ? "filterInputContainer blue" :"filterInputContainer"}>
                 <input
-                    className = "filterTextInput"
-                    placeholder = {props.placeholder}/>
+                    className = {props.color === "blue" ? "filterTextInputBlue" : "filterTextInput"}
+                    placeholder = {props.placeholder}
+                    onChange = {e => props.onChangeInput(e.target.value)}/>
                 <MdLocationOn
                     className = "filterInputDownIcon"
                     size = {20}/>

@@ -1,0 +1,20 @@
+.listView{
+    padding:10px 25px;
+}
+.volunterBtnContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+.volunteerBtn{
+    background-color: #F8B62C;
+    font-weight: bold;
+    padding: 5px 20px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.disabled{
+    background-color:#CFD4D4;
+    color: gray;
+    opacity: 0.5;
+    cursor: not-allowed;
+}

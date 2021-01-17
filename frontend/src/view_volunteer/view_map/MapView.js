@@ -1,5 +1,5 @@
-import ReactMapGL from 'react-map-gl';
 import React, { useState, useEffect } from 'react';
+import ReactMapGL from 'react-map-gl';
 
 //css
 import './MapView.css';
@@ -9,10 +9,9 @@ import mock_task_data from '../../mock_task_data.json';
 
 //components
 import TaskDescriptionCard from './TaskDescriptionCard/TaskDescriptionCard';
-import RequestVolunteerCard from './RequestVolunteerCard/RequestVolunteerCard';
 import TaskMarker from './TaskMarker/TaskMarker';
 
-function MapView(props) { 
+function MapView() { 
   //location
   const [viewport, setViewport] = useState(null);
   const [taskDescriptionCardId, setTaskDescriptionCardId] = useState(null);
@@ -43,14 +42,14 @@ function MapView(props) {
           mapStyle='mapbox://styles/mapbox/outdoors-v10?optimize=true'
           mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_API_KEY}
           onViewportChange={nextViewport => setViewport(nextViewport)}>
-            {props.isRequestView &&
-              <RequestVolunteerCard />}
             {taskDescriptionCardId &&
-              <TaskDescriptionCard />}
+              <TaskDescriptionCard
+                id = {taskDescriptionCardId}/>}
             {mock_task_data.map((task, index) => {
               return(
                 <TaskMarker
                   id =  {task._id}
+                  key = {task._id}
                   longitude = {task.longitude}
                   latitude = {task.latitude}
                   selected = {task._id === taskDescriptionCardId}

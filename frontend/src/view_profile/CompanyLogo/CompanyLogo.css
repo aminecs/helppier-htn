@@ -1,0 +1,9 @@
+.selected{
+    border: 2.5px solid orange;
+}
+.comapnyLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}

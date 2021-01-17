@@ -1,0 +1,77 @@
+.requestVolunteerView{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.requestVolunteerViewContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    flex: 1;
+}
+.requestVolunteerViewBody{
+    display: flex;
+    margin-top: 10px;
+    flex: 1;
+}
+.requestVolunteerViewLeft{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.requestVolunteerViewLeft .filterInput{
+    padding-bottom: 10px;
+}
+.requestVolunteerViewRight{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.requestDescriptionTextInputContainer{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.requestDescriptionTextInputContainer .filterInput{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.requestVolunteerViewLeftFooter{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+    padding-top: 10px;
+}
+.requestVolunteerViewLeftFooterLeft{
+    font-weight: bold;
+}
+.requestVolunteerViewLeftFooterRight{
+    font-size: 12px;
+}
+.requestVolunteerViewRightHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.requestVolunteerViewRightHeaderTitle{
+    font-weight: bold;
+}
+.requestVolunteerViewRightHeaderDescription{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.requestVolunteerMap{
+    flex: 1;
+}
+.requestVolunteerViewFooter{
+    display: flex;
+    justify-content: flex-end;
+}
+.requestVolunteerSubmitBtn{
+    background-color: #90CAE4;
+    font-weight: bold;
+    padding: 7.5px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}

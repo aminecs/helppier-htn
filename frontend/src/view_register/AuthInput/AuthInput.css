@@ -1,0 +1,15 @@
+.authInput{
+    padding: 5px;
+}
+.authInputHeader{
+    font-size: 15px;
+    font-weight: bold;
+}
+.authInputInput{
+    border: none;
+    background-color: #FFF8F1;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+    padding: 10px 20px;
+    width: 300px;
+}

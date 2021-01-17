@@ -1,0 +1,26 @@
+.submittedRequestView{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.submittedRequestViewBtns{
+    margin: 50px;
+    display: flex;
+}
+.viewPostingBtn{
+    font-weight: bold;
+    margin: 10px;
+    background-color: #F8B62C;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+.goToProfileBtn{
+    font-weight: bold;
+    margin: 10px;
+    background-color: black;
+    padding: 15px 20px;
+    color: white;
+    cursor: pointer;
+}

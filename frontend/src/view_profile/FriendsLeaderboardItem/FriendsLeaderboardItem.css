@@ -1,0 +1,13 @@
+.friendsLeaderboardItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid lightgray;
+}
+.friendsLeaderboardItemProfilePicture{
+    margin-right: 5px;
+}
+.friendsLeaderboardItemName{
+    flex: 1;
+}

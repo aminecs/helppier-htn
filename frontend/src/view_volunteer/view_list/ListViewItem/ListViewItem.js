@@ -1,24 +1,37 @@
 import React from 'react';
 import './ListViewItem.css';
 
-function ListViewItem() {
+function ListViewItem(props) {
   return (
-    <div className = "listViewItem">
-      <div className = "listViewItemValue">
-          Nancy M. (70 yrs)
+    <div
+      className = {props.isEven ? "listViewItem listViewGolden" : "listViewItem"}
+      onClick = {() => props.setSelectedTask(props._id)}>
+      <div className = "listViewItemContainer">
+        <div className = "listViewItemValue">
+            {props.name}
+        </div>
+        <div className = "listViewItemValue">
+          {props.createdDate}
+        </div>
+        <div className = "listViewItemValue">
+            {props.type}
+        </div>
+        <div className = "listViewItemValue">
+            {props.time} min
+        </div>
+        <div className = "listViewItemValue">
+            {props.latitude + "," + props.longitude}
+        </div>
+        <div className = "listViewItemValue">
+            {props.rewards} &nbsp;points
+        </div>
       </div>
-      <div className = "listViewItemValue">
-          Delivery
-      </div>
-      <div className = "listViewItemValue">
-          30 - 45 mins
-      </div>
-      <div className = "listViewItemValue">
-          1km away
-      </div>
-      <div className = "listViewItemValue">
-          500 points
-      </div>
+      {props.isSelectedTask &&
+      <div className = "listViewItemValueDescriptionContainer">
+        <div className = "listViewItemValueDescription">
+          "{props.description}"
+        </div>
+      </div>}
     </div>
   );
 }
