@@ -1,12 +1,15 @@
 from cockroachdb.sqlalchemy import run_transaction
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 from ..app import db
 
 class UserModel(db.Model):
     __tablename__ = "user"
 
-    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
     firstname = db.Column(db.String(50))
     lastname = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True, nullable=False)
@@ -31,7 +34,7 @@ class UserModel(db.Model):
     def json(self):
         rewards = float(self.rewards) if self.rewards is not None else None
         return {
-            "id": self.id,
+            "id": self.id.hex,
             "firstname": self.firstname,
             "lastname": self.lastname,
             "email": self.email,

@@ -33,16 +33,16 @@ jwt = JWTManager(app)
 from .resources.user import User, Users, UserLogin, UserRegistration, UserRanking, UserOwnedJobs, UserVolunteeredJobs
 from .resources.job import Job, Jobs, JobCreation
 
-api.add_resource(User, "/api/user/<int:user_id>")
+api.add_resource(User, "/api/user/<string:user_id>")
 api.add_resource(Users, "/api/users")
 api.add_resource(UserRegistration, "/api/register")
 api.add_resource(UserLogin, "/api/login")
-api.add_resource(Job, "/api/job/<int:job_id>")
+api.add_resource(Job, "/api/job/<string:job_id>")
 api.add_resource(JobCreation, "/api/job/create")
 api.add_resource(Jobs, "/api/jobs")
 api.add_resource(UserRanking, "/api/users/top")
-api.add_resource(UserOwnedJobs, "/api/users/<int:user_id>/posted_jobs")
-api.add_resource(UserVolunteeredJobs, "/api/users/<int:user_id>/volunteered_jobs")
+api.add_resource(UserOwnedJobs, "/api/users/<string:user_id>/posted_jobs")
+api.add_resource(UserVolunteeredJobs, "/api/users/<string:user_id>/volunteered_jobs")
 
 # @app.route('/')
 # def hello_world():
