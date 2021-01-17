@@ -3,6 +3,7 @@ import { postRequest } from '../functions_global/request';
 import Logo from '../helppier assets/logoyellow.png';
 import SignUpGraphics from '../helppier assets/SignUpGraphics.png';
 import AuthInput from './AuthInput/AuthInput';
+import Cookies from 'js-cookie';
 
 //css
 import './RegisterView.css';
@@ -43,15 +44,16 @@ function RegisterView() {
 
   //send request for reigster data to backend
   function registerUser(){
-    const data = {username, firstname, lastname, password};
-    console.log(data);
-    /*var request = postRequest(data, "http://localhost:8080");
+    const data = {firstname, lastname, "email": username, password};
+    var request = postRequest(data, "http://localhost:5000/api/register");
     fetch(request).then((response) => {
       response.json().then((data) => {
-        console.log(data);
+        if(data){
+          Cookies.set("userId",data.user_id);
+          incrementCurView();
+        }
       });
-    });*/
-    incrementCurView();
+    });
   }
   
   if(curViewState === 1){

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //css
 import './VolunteerView.css';
@@ -15,6 +15,7 @@ function VolunteerView() {
   const [taskType, setTaskType] = useState(null);
   const [timeCommitment, setTimeCommitment] = useState(null);
   const [neighbourhood, setNeighbourhood] = useState(null);
+  const [displayedTask, setDisplayedTask] = useState([]);
 
   //view states
   const [isMap, toggleIsMap] = useState(true);
@@ -36,11 +37,23 @@ function VolunteerView() {
   function toggleCurrentView(){
     toggleIsMap(!isMap);
   }
+  useEffect(() => {
+    fetch("http://localhost:5000/api/jobs").then((response => response.json()))
+      .then((data) => {
+        setDisplayedTask(data.jobs)
+      }).catch((err) => {
+        if(err){
+          console.log(err);
+        }
+      });
+  }, []);
 
-  console.log(taskType);
-  console.log(timeCommitment);
-  console.log(neighbourhood);
-  
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+    }, 3000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [taskType, timeCommitment]);
 
   return (
     <div className = "volunteerView">
@@ -52,8 +65,11 @@ function VolunteerView() {
         currentViewIsMap = {isMap}
         toggleCurrentView = {toggleCurrentView}/>
       {isMap ?
-        <MapView/> :
+        <MapView
+          displayedTask = {displayedTask}
+          toggleIsThankyou = {toggleIsThankyou}/> :
         <ListView
+          displayedTask = {displayedTask}
           toggleIsThankyou = {toggleIsThankyou}/>}
       {isThankyou && 
         <ThankyouVolunteerView />}

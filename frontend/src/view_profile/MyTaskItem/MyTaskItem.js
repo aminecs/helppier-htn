@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 //css
 import './MyTaskItem.css';
@@ -11,6 +11,14 @@ import Person4Img from '../../helppier assets/person 4.png';
 import Person5Img from '../../helppier assets/person 5.png';
 
 function MyTaskItem(props) {
+  const [owner, setOwner] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/user/${props.owner_id}`).then((response => response.json()))
+      .then((data) => {
+        setOwner(data.user);
+    });
+  }, [])
   return (
     <div className = "profileViewMyRequestItem">
         <div className = "profileViewHelpProfilePicture">
@@ -18,11 +26,11 @@ function MyTaskItem(props) {
             width = {50}
             alt = ""/>
         </div>
-        <div className = "profileViewMyRequestItemValue">{props.name}</div>
-        <div className = "profileViewMyRequestItemValue">{props.createdDate}</div>
-        <div className = "profileViewMyRequestItemValue">{props.task}</div>
-        <div className = "profileViewMyRequestItemValue">{props.time}</div>
-        <div className = "profileViewMyRequestItemValue">{props.points} points</div>
+        <div className = "profileViewMyRequestItemValue">{owner && owner.firstname} {owner && owner.lastname}</div>
+        <div className = "profileViewMyRequestItemValue">{props.created_at}</div>
+        <div className = "profileViewMyRequestItemValue">{props.job_type}</div>
+        <div className = "profileViewMyRequestItemValue">{props.time_needed_mins} mins</div>
+        <div className = "profileViewMyRequestItemValue">{props.reward} points</div>
     </div>
   );
 }

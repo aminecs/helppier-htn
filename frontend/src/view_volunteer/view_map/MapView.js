@@ -11,7 +11,7 @@ import mock_task_data from '../../mock_task_data.json';
 import TaskDescriptionCard from './TaskDescriptionCard/TaskDescriptionCard';
 import TaskMarker from './TaskMarker/TaskMarker';
 
-function MapView() { 
+function MapView(props) { 
   //location
   const [viewport, setViewport] = useState(null);
   const [taskDescriptionCardId, setTaskDescriptionCardId] = useState(null);
@@ -30,8 +30,6 @@ function MapView() {
     }
   }, []);
 
-
-
   if(viewport){
     return (
       <div className = "mapView">
@@ -44,8 +42,10 @@ function MapView() {
           onViewportChange={nextViewport => setViewport(nextViewport)}>
             {taskDescriptionCardId &&
               <TaskDescriptionCard
-                id = {taskDescriptionCardId}/>}
-            {mock_task_data.map((task, index) => {
+                toggleIsThankyou = {props.toggleIsThankyou}
+                id = {taskDescriptionCardId}
+                setTaskDescriptionCardId = {setTaskDescriptionCardId}/>}
+            {/*mock_task_data.map((task, index) => {
               return(
                 <TaskMarker
                   id =  {task._id}
@@ -53,6 +53,17 @@ function MapView() {
                   longitude = {task.longitude}
                   latitude = {task.latitude}
                   selected = {task._id === taskDescriptionCardId}
+                  setTaskDescriptionCardId = {setTaskDescriptionCardId}/>
+              )
+            })*/}
+            {props.displayedTask.map((task, index) => {
+              return(
+                <TaskMarker
+                  id =  {task.id}
+                  key = {task._id}
+                  longitude = {task.longitude}
+                  latitude = {task.latitude}
+                  selected = {task.id === taskDescriptionCardId}
                   setTaskDescriptionCardId = {setTaskDescriptionCardId}/>
               )
             })}

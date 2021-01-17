@@ -18,6 +18,7 @@
 .taskDescriptionCardValue{
     flex: 1;
     font-size: 15px;
+    overflow: hidden;
 }
 .taskDescriptionCardContainerDescription{
     display: flex;
@@ -43,6 +44,7 @@
     padding: 5px;
     margin: 5px;
     font-size: 15px;
+    cursor: pointer;
 }
 .taskDescriptionCardVolunteerBtn{
     flex: 1;
@@ -52,4 +54,5 @@
     padding: 5px;
     margin: 5px;
     font-size: 15px;
+    cursor: pointer;
 }

@@ -3,12 +3,14 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 
 
 from config import Config
 
 def create_app():
     app = Flask(__name__)
+    cors = CORS(app)
 
     app.config.from_object(Config)
 

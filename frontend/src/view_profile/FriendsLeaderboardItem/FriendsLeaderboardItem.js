@@ -19,10 +19,10 @@ function FriendsLeaderboardItem(props) {
               alt = ""/>
         </div>
         <div className = "friendsLeaderboardItemName">
-            Amine B
+            {props.firstname} {props.lastname}
         </div>
         <div className = "friendsLeaderboardItemPoints">
-            36,000 pts
+            {props.rewards} pts
         </div>
     </div>
   );

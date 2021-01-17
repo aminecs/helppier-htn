@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 //css
 import './MainMenu.css';
 
 //icons
-import { FcReddit } from 'react-icons/fc';
 import { GiAlliedStar } from 'react-icons/gi';
+
+//icons
+import LogoYellow from '../helppier assets/logoyellow.png';
+import LogoBlue from '../helppier assets/logoblue.png';
+import LogoOrange from '../helppier assets/logoorange.png';
 
 //components
 import MainDropdownMenu from './MainDropdownMenu/MainDropdownMenu';
@@ -17,19 +22,29 @@ function MainMenu(props) {
   const location = useLocation();
 
   const [dropdownMenuVisible, toggleDropdownMenuVisible] = useState(false);
+  const [curPoints, setCurPoints] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/user/" + Cookies.get("userId")).then((response => response.json()))
+      .then((data) => {
+        if(data.user){
+          setCurPoints(data.user.rewards);
+        }
+      })
+  }, []);
 
   return (
     <div className = "mainMenu">
       {dropdownMenuVisible &&
       <MainDropdownMenu />}
         <div className = "mainMenuLeft">
-            <div onClick = {() => toggleDropdownMenuVisible(!dropdownMenuVisible)}><FcReddit className = "logo" size = {25}/></div>
+            <div onClick = {() => toggleDropdownMenuVisible(!dropdownMenuVisible)}><img src = {location.pathname === "/volunteer" ? LogoYellow : location.pathname === "/request" ? LogoBlue : LogoOrange} width = {50}/></div>
             <div className = {location.pathname === "/volunteer" ? "mainMenuTabBtn mainMenuSelectedGold" : "mainMenuTabBtn"} onClick = {() => history.push("/volunteer")}>Volunteer</div>
             <div className = {location.pathname === "/request" ? "mainMenuTabBtn mainMenuSelectedBlue" : "mainMenuTabBtn"} onClick = {() => history.push("/request")}>Request a Volunteer</div>
             <div className = {location.pathname === "/profile" ? "mainMenuTabBtn mainMenuSelectedOrange" : "mainMenuTabBtn"} onClick = {() => history.push("/profile")}>Profile</div>
         </div>
         <div className = "mainMenuRight">
-          <GiAlliedStar size = {20}/> &nbsp; 6000 points
+          <GiAlliedStar size = {20}/> &nbsp; {curPoints ? curPoints : " "} points
         </div>
     </div>
   );

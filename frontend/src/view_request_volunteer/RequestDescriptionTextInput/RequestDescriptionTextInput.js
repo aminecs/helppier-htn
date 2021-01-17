@@ -10,7 +10,8 @@ function RequestDescriptionTextInput(props) {
             <div className = "filterInputContainerDescription">
                 <textarea
                     className = "filterTextInputDescription"
-                    placeholder = {props.placeholder}/>
+                    placeholder = {props.placeholder}
+                    onChange = {e => props.onChangeInput(e.target.value)}/>
             </div>
         </div>
     );
