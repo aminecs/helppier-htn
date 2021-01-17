@@ -8,6 +8,11 @@ import './MainMenu.css';
 import { FcReddit } from 'react-icons/fc';
 import { GiAlliedStar } from 'react-icons/gi';
 
+//icons
+import LogoYellow from '../helppier assets/logoyellow.png';
+import LogoBlue from '../helppier assets/logoblue.png';
+import LogoOrange from '../helppier assets/logoorange.png';
+
 //components
 import MainDropdownMenu from './MainDropdownMenu/MainDropdownMenu';
 
@@ -23,7 +28,7 @@ function MainMenu(props) {
       {dropdownMenuVisible &&
       <MainDropdownMenu />}
         <div className = "mainMenuLeft">
-            <div onClick = {() => toggleDropdownMenuVisible(!dropdownMenuVisible)}><FcReddit className = "logo" size = {25}/></div>
+            <div onClick = {() => toggleDropdownMenuVisible(!dropdownMenuVisible)}><img src = {location.pathname === "/volunteer" ? LogoYellow : location.pathname === "/request" ? LogoBlue : LogoOrange} width = {50}/></div>
             <div className = {location.pathname === "/volunteer" ? "mainMenuTabBtn mainMenuSelectedGold" : "mainMenuTabBtn"} onClick = {() => history.push("/volunteer")}>Volunteer</div>
             <div className = {location.pathname === "/request" ? "mainMenuTabBtn mainMenuSelectedBlue" : "mainMenuTabBtn"} onClick = {() => history.push("/request")}>Request a Volunteer</div>
             <div className = {location.pathname === "/profile" ? "mainMenuTabBtn mainMenuSelectedOrange" : "mainMenuTabBtn"} onClick = {() => history.push("/profile")}>Profile</div>

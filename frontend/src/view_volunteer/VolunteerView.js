@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //css
 import './VolunteerView.css';
@@ -36,6 +36,16 @@ function VolunteerView() {
   function toggleCurrentView(){
     toggleIsMap(!isMap);
   }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log(process.env.REACT_APP_DOMAIN + "/api/jobs");
+      console.log(taskType);
+      console.log(timeCommitment);
+    }, 3000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [taskType, timeCommitment])
 
   console.log(taskType);
   console.log(timeCommitment);
