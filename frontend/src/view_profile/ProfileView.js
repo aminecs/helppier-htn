@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Cookies from 'js-cookie';
 
 //css
 import './ProfileView.css';
@@ -36,6 +37,26 @@ function ProfileView() {
   const [reedemedPageVisible, toggleReedemedPageVisible] = useState(false);
   const [selectedRedeemItem, selectSelectedRedeemItem] = useState(null);
 
+  //data
+  const [topUsers, setTopUsers] = useState([]);
+  const [postedJobs, setPostedJobs] = useState([]);
+  const [volunteeredJobs, setVolunteeredJobs] = useState([]);
+
+  //component did mount
+  useEffect(() => {
+    fetch("http://localhost:5000/api/users/top").then((response => response.json()))
+      .then((data) => {
+        setTopUsers(data.users)
+    });
+    fetch(`http://localhost:5000/api/users/${Cookies.get("userId")}/posted_jobs`).then((response => response.json()))
+      .then((data) => {
+        setTopUsers(data.users)
+    });
+    fetch(`http://localhost:5000/api/users/${Cookies.get("userId")}/volunteered_jobs`).then((response => response.json()))
+      .then((data) => {
+        setTopUsers(data.users)
+    });
+  }, [])
 
   function redeemGift(){
     if(!redeemVisible){
@@ -153,16 +174,15 @@ function ProfileView() {
           </div>
           <div className = "profileViewMyRequest">
             <div className = "profileViewYourPointsHeader">Your Request</div>
-            <RequestedItem
-              date = "postDate"
-              task = "Sleeping"
-              time = {1}
-              points = {550}/>
-            <RequestedItem
-              date = "postDate"
-              task = "Sleeping"
-              time = {1}
-              points = {550}/>
+            {[1, 2].map((value, index) => {
+              return(
+                <RequestedItem
+                  date = "postDate"
+                  task = "Sleeping"
+                  time = {1}
+                  points = {550}/>
+              )
+            })}
           </div>
           <div className = "profileViewMyRequest">
             <div className = "profileViewYourPointsHeader">People You've Helped</div>

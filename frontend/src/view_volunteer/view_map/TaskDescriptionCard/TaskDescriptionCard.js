@@ -10,6 +10,12 @@ function TaskDescriptionCard(props) {
   const [taskInfo, setTaskInfo] = useState(null);
 
   useEffect(() => {
+    fetch("http://localhost:5000/api/job/" + props.id).then((response => response.json()))
+      .then((data) => {
+        console.log(data);
+      }).catch((err) => {
+        console.log(err);
+      });
     const task = mock_task_data.find(task => task._id === props.id);
     setTaskInfo(task);
   }, [props.id]);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL from 'react-map-gl';
+import Cookies from 'js-cookie';
 
 //css
 import './RequestVolunteerView.css';
@@ -15,6 +16,7 @@ import FilterInput from '../view_volunteer/filter_menu/filter_input/FilterInput'
 import RequestDescriptionTextInput from './RequestDescriptionTextInput/RequestDescriptionTextInput';
 import SubmittedRequestView from './SubmittedRequestView/SubmittedRequestView';
 import RequestTextInput from './RequestTextInput/RequestTextInput';
+import { postRequest } from '../functions_global/request';
 
 function RequestVolunteerView() {
   const [viewport, setViewport] = useState(null);
@@ -57,11 +59,23 @@ function RequestVolunteerView() {
   }
 
   function submit(){
-    console.log(taskType)
-    console.log(timeCommitment);
-    console.log(urgency);
-    console.log(description);
-    setDisplaySubmittedView(true)
+    const data = {
+      "owner_id": Cookies.get("userId"),
+      description,
+      "job_type": taskType,
+      "reward": "100",
+      "latitude": viewport.latitude,
+      "longitude": viewport.longitude,
+      "time_needed_mins": timeCommitment
+    }
+    console.log(data);
+    var request = postRequest(data, "http://localhost:5000/api/job/create");
+    fetch(request).then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+         setDisplaySubmittedView(true)
+      });
+    })
   }
 
   return (

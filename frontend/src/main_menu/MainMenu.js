@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 //css
 import './MainMenu.css';
 
 //icons
-import { FcReddit } from 'react-icons/fc';
 import { GiAlliedStar } from 'react-icons/gi';
 
 //icons
@@ -22,6 +22,17 @@ function MainMenu(props) {
   const location = useLocation();
 
   const [dropdownMenuVisible, toggleDropdownMenuVisible] = useState(false);
+  const [curPoints, setCurPoints] = useState(0);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/user/" + Cookies.get("userId")).then((response => response.json()))
+      .then((data) => {
+        console.log(data.user);
+        if(data.user){
+          setCurPoints(data.user.rewards);
+        }
+      })
+  }, []);
 
   return (
     <div className = "mainMenu">
@@ -34,7 +45,7 @@ function MainMenu(props) {
             <div className = {location.pathname === "/profile" ? "mainMenuTabBtn mainMenuSelectedOrange" : "mainMenuTabBtn"} onClick = {() => history.push("/profile")}>Profile</div>
         </div>
         <div className = "mainMenuRight">
-          <GiAlliedStar size = {20}/> &nbsp; 6000 points
+          <GiAlliedStar size = {20}/> &nbsp; {curPoints} points
         </div>
     </div>
   );
