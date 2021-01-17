@@ -12,10 +12,10 @@ function FilterMenu(props) {
     <div className = "filterMenu">
         <FilterInput
             headerValue = "Task Type"
-            placeholder = "Dog walking, grocery run..."
+            placeholder = "Please select a Type"
             onChangeInput = {props.onChangeTaskType}/>
-        <FilterInput
-            headerValue = "Time Needed"
+        <FilterTextInput
+            headerValue = "Maximum Time"
             placeholder = "Your time commitment"
             onChangeInput = {props.onChangeTimeCommitment}/>
         <FilterTextInput

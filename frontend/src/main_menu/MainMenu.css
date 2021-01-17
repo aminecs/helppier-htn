@@ -11,10 +11,21 @@
     justify-content: center;
     align-items: center;
 }
-.mainMenuSelected{
+.mainMenuRight{
+    font-size: 20px;
+    color: #F58424;
+}
+.mainMenuSelectedGold{
     border-bottom: 5px solid #F8B62C;
 }
+.mainMenuSelectedBlue{
+    border-bottom: 5px solid #90CAE4;
+}
+.mainMenuSelectedOrange{
+    border-bottom: 5px solid #F58424;
+}
 .logo{
+    cursor: pointer;
     padding-left: 25px;
 }
 .mainMenuTabBtn{

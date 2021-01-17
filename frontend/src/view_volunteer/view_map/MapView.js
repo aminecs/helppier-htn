@@ -1,5 +1,5 @@
-import ReactMapGL from 'react-map-gl';
 import React, { useState, useEffect } from 'react';
+import ReactMapGL from 'react-map-gl';
 
 //css
 import './MapView.css';
@@ -11,7 +11,7 @@ import mock_task_data from '../../mock_task_data.json';
 import TaskDescriptionCard from './TaskDescriptionCard/TaskDescriptionCard';
 import TaskMarker from './TaskMarker/TaskMarker';
 
-function MapView(props) { 
+function MapView() { 
   //location
   const [viewport, setViewport] = useState(null);
   const [taskDescriptionCardId, setTaskDescriptionCardId] = useState(null);
@@ -49,6 +49,7 @@ function MapView(props) {
               return(
                 <TaskMarker
                   id =  {task._id}
+                  key = {task._id}
                   longitude = {task.longitude}
                   latitude = {task.latitude}
                   selected = {task._id === taskDescriptionCardId}

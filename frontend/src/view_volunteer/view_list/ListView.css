@@ -10,6 +10,7 @@
     font-weight: bold;
     padding: 5px 20px;
     margin: 5px 0;
+    cursor: pointer;
 }
 .disabled{
     background-color:#CFD4D4;

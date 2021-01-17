@@ -1,0 +1,16 @@
+.thankyouPurchaseView{
+    width: 100vw;
+    height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btfBtn{
+    padding: 10px 20px;
+    background-color: black;
+    font-weight: bold;
+    color:white;
+    margin: 25px;
+    cursor: pointer;
+}

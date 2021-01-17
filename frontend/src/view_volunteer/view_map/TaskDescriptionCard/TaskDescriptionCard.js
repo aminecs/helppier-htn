@@ -11,7 +11,6 @@ function TaskDescriptionCard(props) {
 
   useEffect(() => {
     const task = mock_task_data.find(task => task._id === props.id);
-    console.log(task);
     setTaskInfo(task);
   }, [props.id]);
 

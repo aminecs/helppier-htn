@@ -1,6 +1,7 @@
 .filterMenu{
     display: flex;
     padding: 25px;
+    height: 50px;
 }
 .mapViewBtnContainer{
     display: flex;

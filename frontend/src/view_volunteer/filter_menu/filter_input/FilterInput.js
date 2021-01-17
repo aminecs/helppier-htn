@@ -10,15 +10,18 @@ function FilterInput(props) {
     return(
         <div className = "filterInput">
             <div className = "filterInputHeader">{props.headerValue}</div>
-            <div className = "filterInputContainer">
-                <select value = {null}>
+            <div className = {props.color=== "blue" ? "filterInputContainer blue" :"filterInputContainer"}>
+                <select className="select" onChange = {e => props.onChangeInput(e.target.value)}>
                     <option disabled selected value> {props.placeholder} </option>
-                    <option value="0">Ehne mehne Muh</option>
-                    <option value="1">Test</option>
-                    <option value="2">Test 2</option>
+                    <option value="delivery">Delivery</option>
+                    <option value="tutoring">Tutoring</option>
+                    <option value="dogwalking">Dog Walking</option>
+                    <option value="cakebaking">Cake Baking</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="transportation">Transportation</option>
                 </select>
                 <BiCaretDown
-                    className = "filterInputDownIcon"
+                    className = {props.color === "blue" ? "filterInputDownIcon colorBlue" : "filterInputDownIcon"}
                     size = {20}/>
             </div>
         </div>

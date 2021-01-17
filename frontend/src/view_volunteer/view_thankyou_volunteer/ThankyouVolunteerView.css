@@ -1,0 +1,41 @@
+.thankyouVolunteerView{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 170px);
+    bottom: 0;
+    background-color: white;
+    padding: 50px;
+}
+.thankyouVolunteerViewBody{
+    display: flex;
+    margin-top: 50px;
+    flex: 1;
+}
+.thankyouVolunteerViewBodyLeft{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+    margin: 10px;
+}
+.thankyouVolunteerViewBodyRight{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+}
+.whoYoureHelpingCard{
+    display: flex;
+    background-color: #FFF8F1;
+    padding: 10px;
+    border-radius: 5px;
+}
+.thankyouVolunteerViewBodyRightHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.thankyouVolunteerViewMap{
+    flex: 1;
+}

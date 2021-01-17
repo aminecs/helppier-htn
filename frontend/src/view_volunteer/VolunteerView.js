@@ -5,9 +5,10 @@ import './VolunteerView.css';
 
 //components
 import FilterMenu from './filter_menu/FilterMenu';
-import MainMenu from './main_menu/MainMenu';
+import MainMenu from '../main_menu/MainMenu';
 import MapView from './view_map/MapView';
 import ListView from './view_list/ListView';
+import ThankyouVolunteerView from './view_thankyou_volunteer/ThankyouVolunteerView';
 
 function VolunteerView() {
   //inputs
@@ -17,6 +18,7 @@ function VolunteerView() {
 
   //view states
   const [isMap, toggleIsMap] = useState(true);
+  const [isThankyou, toggleIsThankyou] = useState(false);
 
   //on change inputs
   function onChangeTaskType(value){
@@ -35,6 +37,11 @@ function VolunteerView() {
     toggleIsMap(!isMap);
   }
 
+  console.log(taskType);
+  console.log(timeCommitment);
+  console.log(neighbourhood);
+  
+
   return (
     <div className = "volunteerView">
       <MainMenu/>
@@ -46,7 +53,10 @@ function VolunteerView() {
         toggleCurrentView = {toggleCurrentView}/>
       {isMap ?
         <MapView/> :
-        <ListView />}
+        <ListView
+          toggleIsThankyou = {toggleIsThankyou}/>}
+      {isThankyou && 
+        <ThankyouVolunteerView />}
     </div>
   );
 }

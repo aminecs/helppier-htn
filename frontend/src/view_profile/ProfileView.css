@@ -1,0 +1,133 @@
+.profileViewContainer{
+    display: flex;
+    flex:1;
+    padding: 20px;
+}
+.profileViewLeft{
+    padding: 25px 25px 25px 0;
+    width: 250px;
+}
+.profileViewUserInfo{
+    padding: 5px;
+    margin-top: 50px;
+    background-color: #FFF8F1;
+}
+.profileViewProfilePicture{
+    position: absolute;
+    transform: translateY(-60%);
+    left: 100px;
+}
+.profileViewEditButton{
+    text-align: right;
+    padding-bottom: 15px;
+}
+.profileViewName{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.profileViewBio{
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.profileViewLocation, .profileViewEmail, .profileViewPhone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    font-weight: 15px;
+    margin-bottom: 10px;
+}
+.profileViewFriendLeaderboardHeader{
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.friendsLeaderboardContainer{
+    background-color: #FFF8F1;
+    padding: 20px;
+}
+
+
+
+.profileViewRight{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.profileViewYourPoints{
+    margin-bottom: 15px;
+}
+.profileViewYourPointsHeader{
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.profileViewYourPointsBody{
+    background-color: #FFF8F1;
+    padding: 20px;
+}
+.profileViewYourPointsBodyHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.profileViewYourPointsBodyHeaderPoints{
+    display: flex;
+    align-items: center;
+    color: #F58424;
+    font-weight: bold;
+}
+.profileViewYourPointsFooter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.redeemBtn{
+    background-color: #F58424;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.pointsIndicator{
+    width: 70%;
+    height: 20px;
+    border: 1px solid lightgray;
+}
+.pointsIndicatorFill{
+    height: 100%;
+    width: 50%;
+    background-color: #F58424;
+}
+.pointsIndicatorFillStar{
+    position: absolute;
+    background-color: #F58424;
+    padding: 5px;
+    border-radius: 50%;
+}
+.profileViewMyRequest{
+    margin: 5px 0;
+}
+.profileViewMyRequestItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFF8F1;
+    margin: 5px 0;
+    padding: 20px 10px;
+}
+.profileViewMyRequestItemValue{
+    flex: 1;
+}
+.redeemContainer{
+    margin: 20px 0;
+}
+.reddemComapnyLogos{
+    display: flex;
+}
+.comapnyLogo{
+    flex: 1;
+    padding: 15px;
+    cursor: pointer;
+}

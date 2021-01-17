@@ -1,5 +1,4 @@
 .filterInput{
-    flex: 1;
     margin-right: 30px;
 }
 .filterInputHeader{
@@ -22,13 +21,21 @@ select{
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
-    background-color: #FFF8F1;
     outline: none;
     cursor: pointer;
-    color: rgb(192, 190, 190);
+
     width: 100%;
+}
+.select{
+    background-color:rgba(144, 202, 228, 0);
+}
+.blue{
+    background-color:rgba(144, 202, 228, 0.2);
 }
 .filterInputDownIcon{
     margin-left: 15px;
     color: #F8B62C;
+}
+.colorBlue{
+   color: #90CAE4
 }
