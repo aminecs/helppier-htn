@@ -39,9 +39,10 @@ function VolunteerView() {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log(process.env.REACT_APP_DOMAIN + "/api/jobs");
-      console.log(taskType);
-      console.log(timeCommitment);
+      /*fetch(process.env.REACT_APP_DOMAIN + "/api/jobs").then((response => response.json()))
+      .then((data) => {
+        console.log(data);
+      })*/
     }, 3000)
 
     return () => clearTimeout(delayDebounceFn)
