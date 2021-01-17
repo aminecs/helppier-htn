@@ -11,7 +11,7 @@ import { FiHelpCircle, FiLogOut } from 'react-icons/fi';
 function MainDropdownMenu() {
     const history = useHistory();
     function logout(){
-        history.push("/login")
+        history.push("/register")
     }
     return (
         <div className = "mainDropdownMenu">

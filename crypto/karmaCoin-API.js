@@ -14,8 +14,8 @@ web3.eth.accounts.wallet.add(process.env.user2_pk); // User 2
 var express = require("express");
 var app = express();
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(3001, () => {
+    console.log("Server running on port 3001");
    });
 
 // Transfer 1 token between two accounts by passing parameter from and to

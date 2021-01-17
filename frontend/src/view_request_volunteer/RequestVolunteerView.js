@@ -68,11 +68,9 @@ function RequestVolunteerView() {
       "longitude": viewport.longitude,
       "time_needed_mins": timeCommitment
     }
-    console.log(data);
     var request = postRequest(data, "http://localhost:5000/api/job/create");
     fetch(request).then((response) => {
       response.json().then((data) => {
-        console.log(data);
          setDisplaySubmittedView(true)
       });
     })

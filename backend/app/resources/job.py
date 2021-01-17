@@ -68,6 +68,6 @@ class JobCreation(Resource):
         req_body = request.get_json()
 
         new_job = JobModel( description=req_body["description"], owner_id=req_body["owner_id"], longitude=req_body["longitude"], latitude=req_body["latitude"], job_type=req_body["job_type"], time_needed_mins=req_body["time_needed_mins"])
-        new_job.init_save()
+        new_job.save()
 
         return {"msg": "Job successfully created"}, 201

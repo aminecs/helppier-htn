@@ -12,7 +12,6 @@ import TaskDescriptionCard from './TaskDescriptionCard/TaskDescriptionCard';
 import TaskMarker from './TaskMarker/TaskMarker';
 
 function MapView(props) { 
-  console.log(props);
   //location
   const [viewport, setViewport] = useState(null);
   const [taskDescriptionCardId, setTaskDescriptionCardId] = useState(null);
@@ -43,7 +42,9 @@ function MapView(props) {
           onViewportChange={nextViewport => setViewport(nextViewport)}>
             {taskDescriptionCardId &&
               <TaskDescriptionCard
-                id = {taskDescriptionCardId}/>}
+                toggleIsThankyou = {props.toggleIsThankyou}
+                id = {taskDescriptionCardId}
+                setTaskDescriptionCardId = {setTaskDescriptionCardId}/>}
             {/*mock_task_data.map((task, index) => {
               return(
                 <TaskMarker
@@ -62,7 +63,7 @@ function MapView(props) {
                   key = {task._id}
                   longitude = {task.longitude}
                   latitude = {task.latitude}
-                  selected = {task._id === taskDescriptionCardId}
+                  selected = {task.id === taskDescriptionCardId}
                   setTaskDescriptionCardId = {setTaskDescriptionCardId}/>
               )
             })}

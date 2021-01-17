@@ -2,6 +2,8 @@ from cockroachdb.sqlalchemy import run_transaction
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+import os, random
+from ..crypto_req import getBalance
 
 from ..app import db
 
@@ -28,6 +30,7 @@ class UserModel(db.Model):
 
 
     def save(self):
+        self.add_wallet()
         db.session.add(self)
         db.session.commit()
 
@@ -55,10 +58,20 @@ class UserModel(db.Model):
         return []
 
 
-    def add_wallet(self, wallet_id, wallet_key):
+    def add_wallet(self):
         """Create and store a users wallet information"""
 
-        return None
+        if self.wallet_addr is None:
+            wallets_str = os.environ.get("CRYPTO_WALLETS", None)
+            if wallets_str is not None:
+                wallets = wallets_str.split(" ")
+                print(wallets)
+                self.wallet_addr = random.choice(wallets)
+                print(f"Wallet address is {self.wallet_addr}")
+                # get balance
+                self.rewards = getBalance(self.wallet_addr)
+            else:
+                print("Coult not find 'CRYPTO_WALLETS' environment variable to add wallet")
 
     @classmethod
     def get_top_earners(cls, limit=None):

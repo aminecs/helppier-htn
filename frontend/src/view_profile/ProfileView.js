@@ -38,6 +38,7 @@ function ProfileView() {
   const [selectedRedeemItem, selectSelectedRedeemItem] = useState(null);
 
   //data
+  const [myUser, setMyUser] = useState(null);
   const [topUsers, setTopUsers] = useState([]);
   const [postedJobs, setPostedJobs] = useState([]);
   const [volunteeredJobs, setVolunteeredJobs] = useState([]);
@@ -46,16 +47,22 @@ function ProfileView() {
   useEffect(() => {
     fetch("http://localhost:5000/api/users/top").then((response => response.json()))
       .then((data) => {
-        setTopUsers(data.users)
+        setTopUsers(data.users.slice(Math.max(data.users.length - 5, 0)).reverse())
     });
     fetch(`http://localhost:5000/api/users/${Cookies.get("userId")}/posted_jobs`).then((response => response.json()))
       .then((data) => {
-        setTopUsers(data.users)
+        setPostedJobs(data.jobs)
     });
     fetch(`http://localhost:5000/api/users/${Cookies.get("userId")}/volunteered_jobs`).then((response => response.json()))
       .then((data) => {
-        setTopUsers(data.users)
+        setVolunteeredJobs(data.jobs)
     });
+    fetch("http://localhost:5000/api/user/" + Cookies.get("userId")).then((response => response.json()))
+      .then((data) => {
+        if(data.user){
+          setMyUser(data.user);
+        }
+      })
   }, [])
 
   function redeemGift(){
@@ -68,8 +75,7 @@ function ProfileView() {
     }
   }
 
-  console.log(selectedRedeemItem);
-
+  if(myUser){
   return (
     <div className = "profileView">
       <MainMenu />
@@ -79,18 +85,19 @@ function ProfileView() {
           <div className = "profileViewUserInfo">
             <div className = "profileViewProfilePicture"><img src = {Person1Img} width={100} alt = ""/></div>
             <div className = "profileViewEditButton"><FaEdit size = {20} color = "#F58424"/></div>
-            <div className = "profileViewName">Gillian North</div>
-            <div className = "profileViewBio">Dog Lover. Coffee Connoisseur.Plant Mom. Helping.</div>
-            <div className = "profileViewLocation"><MdLocationOn size = {20} color = "#F58424"/>Southwark, London</div>
-            <div className = "profileViewEmail"><HiOutlineMail size = {20} color = "#F58424"/>magic4@htn.com</div>
-            <div className = "profileViewPhone"><HiOutlinePhone size = {20} color = "#F58424"/>123.456.7890</div>
+            <div className = "profileViewName">{myUser.firstname} {myUser.lastname}</div>
+            <div className = "profileViewBio">{myUser.bio ? myUser.bio : "This is my bio..."}</div>
+            <div className = "profileViewLocation"><MdLocationOn size = {20} color = "#F58424"/>&nbsp;Southwark, London</div>
+            <div className = "profileViewEmail"><HiOutlineMail size = {20} color = "#F58424"/>&nbsp;{myUser.email}</div>
+            <div className = "profileViewPhone"><HiOutlinePhone size = {20} color = "#F58424"/>&nbsp;{myUser.mobile_phone ? myUser.mobile_phone : "No phone"}</div>
           </div>
           <div className = "profileViewFriendLeaderboard">
             <div className= "profileViewFriendLeaderboardHeader">Friend Leaderboard</div>
             <div className = "friendsLeaderboardContainer">
-              {[1,2,3,4,5].map((user, index) => {
+              {topUsers.map((item, index) => {
                 return(
                   <FriendsLeaderboardItem
+                    {...item}
                     key = {index}
                     index = {index}/>
                 )
@@ -103,7 +110,7 @@ function ProfileView() {
             <div className = "profileViewYourPointsHeader">Your Points</div>
             <div className = "profileViewYourPointsBody">
               <div className = "profileViewYourPointsBodyHeader">
-                <div className = "profileViewYourPointsBodyHeaderPoints"><GiAlliedStar />&nbsp;6000 Points</div>
+                <div className = "profileViewYourPointsBodyHeaderPoints"><GiAlliedStar />&nbsp;{myUser.rewards} Points</div>
                 <div><b>Level: Neighbourhood Champ</b></div>
               </div>
               <div className = "profileViewYourPointsBody">
@@ -112,9 +119,9 @@ function ProfileView() {
                     <div className = "pointsIndicatorFillStar" style ={{position: "absolute", transform: "translateY(-20%)", left: 550}}>
                       <BsStarFill size={20} color="white"/>
                     </div>
-                    <div style ={{position: "absolute", transform: "translateY(160%)", left: 525, color: "#F58424"}}><b>6000 points</b></div>
+                    <div style ={{position: "absolute", transform: "translateY(160%)", left: 525, color: "#F58424"}}><b>{myUser.rewards} points</b></div>
                   </div>
-                  <div style ={{position: "absolute", transform: "translateY(50%)", left: 725}}><b>10000 points</b></div>
+                  <div style ={{position: "absolute", transform: "translateY(50%)", left: 725}}><b>10 points</b></div>
                 </div>
               </div>
               {redeemVisible &&
@@ -167,35 +174,30 @@ function ProfileView() {
                   </div>
                 </div>}
               <div className = "profileViewYourPointsFooter">
-                <div className = "">Every 10,000 points earns you $10 at a local retailer of your choice!</div>
+                <div className = "">Every 10 points earns you $10 at a local retailer of your choice!</div>
                 <div className = "redeemBtn" onClick = {redeemGift}>Redeem</div>
               </div>
             </div>
           </div>
           <div className = "profileViewMyRequest">
             <div className = "profileViewYourPointsHeader">Your Request</div>
-            {[1, 2].map((value, index) => {
+            {postedJobs.map((value, index) => {
               return(
                 <RequestedItem
-                  date = "postDate"
-                  task = "Sleeping"
-                  time = {1}
-                  points = {550}/>
+                  key = {index}
+                  index = {index}
+                  {...value}/>
               )
             })}
           </div>
           <div className = "profileViewMyRequest">
             <div className = "profileViewYourPointsHeader">People You've Helped</div>
-            {[1,2].map((user, index) => {
+            {volunteeredJobs.map((job, index) => {
               return(
                 <MyTaskItem
                   key = {index}
                   index = {index}
-                  name = "Nancy M"
-                  createdDate = "Jan 18th, 2021"
-                  task = "Delivery"
-                  time = {30}
-                  points = {500}/>
+                  {...job}/>
             )})}
           </div>
         </div>
@@ -204,6 +206,10 @@ function ProfileView() {
         toggle = {toggleReedemedPageVisible}/>}
     </div>
   );
+              }
+              else{
+                return (null);
+              }
 }
 
 export default ProfileView;

@@ -22,12 +22,11 @@ function MainMenu(props) {
   const location = useLocation();
 
   const [dropdownMenuVisible, toggleDropdownMenuVisible] = useState(false);
-  const [curPoints, setCurPoints] = useState(0);
+  const [curPoints, setCurPoints] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/user/" + Cookies.get("userId")).then((response => response.json()))
       .then((data) => {
-        console.log(data.user);
         if(data.user){
           setCurPoints(data.user.rewards);
         }
@@ -45,7 +44,7 @@ function MainMenu(props) {
             <div className = {location.pathname === "/profile" ? "mainMenuTabBtn mainMenuSelectedOrange" : "mainMenuTabBtn"} onClick = {() => history.push("/profile")}>Profile</div>
         </div>
         <div className = "mainMenuRight">
-          <GiAlliedStar size = {20}/> &nbsp; {curPoints} points
+          <GiAlliedStar size = {20}/> &nbsp; {curPoints ? curPoints : " "} points
         </div>
     </div>
   );

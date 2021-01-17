@@ -50,9 +50,6 @@ function VolunteerView() {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log(taskType);
-    console.log(timeCommitment);
-    console.log(neighbourhood);
     }, 3000)
 
     return () => clearTimeout(delayDebounceFn)
@@ -69,8 +66,10 @@ function VolunteerView() {
         toggleCurrentView = {toggleCurrentView}/>
       {isMap ?
         <MapView
-          displayedTask = {displayedTask}/> :
+          displayedTask = {displayedTask}
+          toggleIsThankyou = {toggleIsThankyou}/> :
         <ListView
+          displayedTask = {displayedTask}
           toggleIsThankyou = {toggleIsThankyou}/>}
       {isThankyou && 
         <ThankyouVolunteerView />}

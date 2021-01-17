@@ -43,12 +43,13 @@ class JobModel(db.Model):
 
     def json(self):
         created_time = self.created_at.strftime("%m/%d/%Y") if self.created_at is not None else None
+        volunteer_id = self.volunteer_id.hex if self.volunteer_id is not None else None
         return {
             "id": self.id.hex,
             "title": self.title,
             "description": self.description,
-            "owner_id": self.owner_id,
-            "volunteer_id": self.volunteer_id,
+            "owner_id": self.owner_id.hex,
+            "volunteer_id": volunteer_id,
             "longitude": self.longitude,
             "latitude": self.latitude,
             "job_type": self.job_type,
@@ -76,7 +77,7 @@ class JobModel(db.Model):
         """Saves and turns latitude & longitude into point objects"""
         connection = db.engine.raw_connection()
         with connection.cursor() as cur:
-            stmt = f"INSERT INTO job (description, owner_id, location, latitude, longitude, job_type, time_needed_mins) VALUES( '{self.description}', {self.owner_id}, ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326), {self.latitude}, {self.longitude}, '{self.job_type}', {self.time_needed_mins});"
+            stmt = f"INSERT INTO job (description, owner_id, location, latitude, longitude, job_type, time_needed_mins) VALUES( '{self.description}', '{self.owner_id}', ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326), {self.latitude}, {self.longitude}, '{self.job_type}', {self.time_needed_mins});"
             cur.execute(
                 stmt
             )
@@ -104,7 +105,7 @@ class JobModel(db.Model):
         connection = db.engine.raw_connection()
         with connection.cursor() as cur:
             # stmt = f"SELECT id, ST_Distance("
-            stmt = f"INSERT INTO job (description, owner_id, location, latitude, longitude) VALUES( '{self.description}', {self.owner_id}, ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326), {self.latitude}, {self.longitude});"
+            stmt = f"INSERT INTO job (description, owner_id, location, latitude, longitude) VALUES( '{self.description}', '{self.owner_id}', ST_SetSRID(ST_MakePoint({self.latitude}, {self.longitude}), 4326), {self.latitude}, {self.longitude});"
             # print(stmt)
             cur.execute(
                 stmt

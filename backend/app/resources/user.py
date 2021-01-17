@@ -12,8 +12,6 @@ class User(Resource):
     def get(self, user_id):
         """Get a specific users details"""
         user = UserModel.find_by_id(user_id)
-        print(user)
-        print(type(user.id))
         # print(user)
         # print(user.json())
         if user is None:
@@ -69,7 +67,7 @@ class UserRegistration(Resource):
             user.save()
         except IntegrityError as e:
             return {"error": "email already registered"}, 404
-        return {"msg": "User successfully saved", "user_id": user.id}, 201
+        return {"msg": "User successfully saved", "user_id": user.id.hex}, 201
 
 
 class UserLogin(Resource):
