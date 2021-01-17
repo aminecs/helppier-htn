@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from flask_restful import Resource
+from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import (
     create_access_token, create_refresh_token,
     jwt_required
@@ -10,10 +11,9 @@ from ..models.user import UserModel
 class User(Resource):
     def get(self, user_id):
         """Get a specific users details"""
-        print("getting id: {}".format(user_id))
         user = UserModel.find_by_id(user_id)
         if user is None:
-            return {"msg": "User not found"}
+            return {"error": "User not found"}
 
         return {"user": user.json()}
 
@@ -27,16 +27,17 @@ class Users(Resource):
         return {
             "users": users_json
         }
-        return {"msg": "Get users route under construction"}
+
 
 class UserRegistration(Resource):
     def post(self):
         """Register User"""
         req_json = request.get_json()
-        print(req_json)
         user = UserModel(**req_json)
-        user.save()
-        print(user)
+        try:
+            user.save()
+        except IntegrityError as e:
+            return {"error": "email already registered"}, 404
         return {"msg": "User successfully saved", "user_id": user.id}, 201
 
 class UserLogin(Resource):
@@ -68,5 +69,3 @@ class UserLogin(Resource):
                 "tokens": tokens,
             },
         }
-
-        return {"msg": "Login route under construction"}

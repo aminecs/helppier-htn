@@ -11,7 +11,7 @@ class UserModel(db.Model):
     lastname = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80))
-    rewards = db.Column(db.Numeric(10,2))
+    rewards = db.Column(db.Numeric(10,2), default=0)
 
     owned_jobs = db.relationship('JobModel', backref='owner', lazy=True, foreign_keys="JobModel.owner_id")
     volunteered_jobs = db.relationship('JobModel', backref='volunteer', lazy=True, foreign_keys="JobModel.owner_id")
