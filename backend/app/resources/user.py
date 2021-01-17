@@ -12,6 +12,10 @@ class User(Resource):
     def get(self, user_id):
         """Get a specific users details"""
         user = UserModel.find_by_id(user_id)
+        print(user)
+        print(type(user.id))
+        # print(user)
+        # print(user.json())
         if user is None:
             return {"error": "User not found"}
 

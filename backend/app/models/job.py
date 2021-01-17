@@ -10,21 +10,22 @@ from datetime import datetime
 
 from ..app import db, app
 from .user import UserModel
-
-import psycopg2
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 
 
 class JobModel(db.Model):
     __tablename__ = "job"
 
-    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
     title = db.Column(db.String(100), default="")
     description = db.Column(db.String(400), nullable=False)
     job_type = db.Column(db.String(25))
 
-    owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    volunteer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+    owner_id = db.Column(UUID(as_uuid=True), db.ForeignKey("user.id"), nullable=False)
+    volunteer_id = db.Column(UUID(as_uuid=True), db.ForeignKey("user.id"), nullable=True)
     reward = db.Column(db.Integer, default=100, nullable=False)
 
     location = db.Column(Geometry(geometry_type="POINT", srid=4326)) # point representing long & lat
@@ -43,7 +44,7 @@ class JobModel(db.Model):
     def json(self):
         created_time = self.created_at.strftime("%m/%d/%Y") if self.created_at is not None else None
         return {
-            "id": self.id,
+            "id": self.id.hex,
             "title": self.title,
             "description": self.description,
             "owner_id": self.owner_id,
